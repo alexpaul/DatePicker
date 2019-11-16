@@ -33,7 +33,7 @@ Using UIDatePicker, Date, DateFormatter and unwind segue to create a Date event 
 ```
 
 #### updateUIFromUnwindSegue - unwind segue method, gets data from the source view controller to the destination view controller
-```
+```swift
   @IBAction func updateUIFromUnwindSegue(segue: UIStoryboardSegue) {
     // we need access to the source destination view controller
     guard let detailViewController = segue.source as? DetailViewController else {
