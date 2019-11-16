@@ -63,8 +63,7 @@ class CreateEventViewController: UIViewController {
       return
     }
     
-    // we could set the event on the detail view controller
-    
+    // 2. we need to set the event object for the detailViewController
     // where we segueing to now has its event set successfully
     detailViewController.event = event
   }
