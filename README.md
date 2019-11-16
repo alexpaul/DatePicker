@@ -60,3 +60,5 @@ Using UIDatePicker, Date, DateFormatter and unwind segue to create a Date event 
     // ui elements that gets updated are the rsvpLabel's text and createEventButton's titleLabel
   }
 ```
+
+## [Lecture Video](https://youtu.be/VXEHsZ1lH3Q)
