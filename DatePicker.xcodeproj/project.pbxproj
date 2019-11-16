@@ -62,9 +62,9 @@
 			children = (
 				5745C172237DAB920079E73B /* AppDelegate.swift */,
 				5745C174237DAB920079E73B /* SceneDelegate.swift */,
+				5745C188237DBFDF0079E73B /* Event.swift */,
 				5745C176237DAB920079E73B /* CreateEventViewController.swift */,
 				5745C186237DBF4E0079E73B /* DetailViewController.swift */,
-				5745C188237DBFDF0079E73B /* Event.swift */,
 				5745C178237DAB920079E73B /* Main.storyboard */,
 				5745C17B237DAB970079E73B /* Assets.xcassets */,
 				5745C17D237DAB970079E73B /* LaunchScreen.storyboard */,

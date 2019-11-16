@@ -17,10 +17,11 @@ class CreateEventViewController: UIViewController {
   @IBOutlet weak var createEventButton: UIButton!
   @IBOutlet weak var rsvpLabel: UILabel!
   
-  var event: Event! {
+  var event: Event? {
     didSet { // property observer, gets called when the property changes
+      // changes meaning when it gets assigned a new value
       // update UI whenever the event changes
-      if event.willAttend {
+      if event?.willAttend ?? false {
         // update label and button
         rsvpLabel.text = "RSVP YES"
         createEventButton.setTitle("View Event", for: .normal)
@@ -32,6 +33,7 @@ class CreateEventViewController: UIViewController {
   }
   
   // MARK: - view controller life cycle methods
+  
   override func viewDidLoad() { // configure startup logic
     super.viewDidLoad()
     // we need to set this view controller as the delegate object
@@ -71,7 +73,34 @@ class CreateEventViewController: UIViewController {
   
   @IBAction func datePickerChanged(_ sender: UIDatePicker) {
     // updating the event's date
-    event.date = sender.date
+    event?.date = sender.date
+  }
+  
+  // unwind segue action
+  // we need to create an IBAction for the unwind segue
+  // we need to connect the action button from the source
+  // view controller (DetailViewController) to this unwind segue action
+  
+  // it's REQUIRED to have a parameter of type UIStoryboardSegue in
+  // the unwind segue action
+  // why: this is the only way interface builder can recognize
+  // an unwind segue to connect to
+  
+  // Steps to create an unwind segue - returning from a source view controller
+  // 1. write an @IBAction func
+  // 2. a UIStorybaordSegue parameter is REQUIRED e.g segue: UIStoryboardSegue
+  // 3. type cast ( as? ) and get access to the soure view controller instance
+  // 4. setup ui accordingly see event = detailViewController.event, didSet{....} on event property above
+  // 5. in storyboard control-drag action button to "exit" icon in source view controlller scene and select e.g this method (updateUIFromUnwindSegue)
+  @IBAction func updateUIFromUnwindSegue(segue: UIStoryboardSegue) {
+    // we need access to the source destination view controller
+    guard let detailViewController = segue.source as? DetailViewController else {
+      return // more on refactoring to fatalError() later
+    }
+    event = detailViewController.event
+    // after event is set here, didSet{....} on the event property gets called
+    // and the UI (user interface) is updated
+    // ui elements that gets updated are the rsvpLabel's text and createEventButton's titleLabel
   }
 }
 
@@ -80,7 +109,7 @@ extension CreateEventViewController: UITextFieldDelegate {
     textField.resignFirstResponder()
     
     // updating the event's name
-    event.name = eventTextField.text ?? "" // use nil-coelescing to unwrap
+    event?.name = eventTextField.text ?? "" // use nil-coelescing to unwrap
     return true
   }
 }
